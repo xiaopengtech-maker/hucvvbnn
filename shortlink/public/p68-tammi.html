@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 30px;
+            max-width: 480px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: normal;
+            text-align: center;
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #999;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        input[type="url"]:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .btn {
+            width: 100%;
+            background: #555;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+
+        .btn:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            display: none;
+            font-size: 13px;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .link-url {
+            word-break: break-all;
+            margin: 8px 0;
+            font-family: monospace;
+        }
+
+        .copy-btn {
+            background: #777;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .status {
+            margin-top: 12px;
+            padding: 8px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        .status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .cert-info {
+            margin-top: 25px;
+            padding-top: 12px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BACKLINK PAYMENT</h1>
+
+        <label for="urlInput">Nhập URL cần rút gọn:</label>
+        <input 
+            type="url" 
+            id="urlInput" 
+            placeholder="https://example.com/..."
+            required
+        >
+
+        <button class="btn" onclick="shortenUrl()">Rút gọn</button>
+
+        <div class="loading" id="loading">
+            Đang xử lý...
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="result" id="result">
+            <div>Link đã rút gọn:</div>
+            <div class="link-url" id="shortUrl"></div>
+            <button class="copy-btn" onclick="copyShortUrl()">Copy</button>
+
+            <div style="margin-top: 12px; color: #555;">
+                Link gốc:
+                <div class="link-url" id="originalUrl"></div>
+            </div>
+        </div>
+
+        <div class="cert-info">
+            Certificate: CA-26/11/2029.p12
+        </div>
+    </div>
+
+    <script>
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status show ${type}`;
+        }
+
+        function showLoading(show) {
+            const loadingEl = document.getElementById('loading');
+            loadingEl.className = show ? 'loading show' : 'loading';
+        }
+
+        async function shortenUrl() {
+            const urlInput = document.getElementById('urlInput');
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                showStatus('Vui lòng nhập URL!', 'error');
+                return;
+            }
+
+            try {
+                new URL(url);
+            } catch (e) {
+                showStatus('URL không hợp lệ!', 'error');
+                return;
+            }
+
+            showLoading(true);
+            document.getElementById('result').classList.remove('show');
+            document.getElementById('status').classList.remove('show');
+
+            try {
+                const response = await fetch('/api/shorten', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                showLoading(false);
+
+                if (response.ok) {
+                    document.getElementById('shortUrl').textContent = data.shortUrl;
+                    document.getElementById('originalUrl').textContent = data.originalUrl;
+                    document.getElementById('result').classList.add('show');
+                    showStatus('Rút gọn thành công!', 'success');
+                } else {
+                    showStatus('Lỗi: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showLoading(false);
+                showStatus('Lỗi kết nối: ' + error.message, 'error');
+            }
+        }
+
+        function copyShortUrl() {
+            const shortUrl = document.getElementById('shortUrl').textContent;
+            navigator.clipboard.writeText(shortUrl).then(() => {
+                showStatus('Đã copy link!', 'success');
+            }).catch(err => {
+                showStatus('Không thể copy: ' + err.message, 'error');
+            });
+        }
+
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                shortenUrl();
+            }
+        });
+    </script>
+</body>
+</html>
