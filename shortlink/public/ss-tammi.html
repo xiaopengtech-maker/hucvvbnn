@@ -264,4 +264,133 @@
                 <div class="link-url" id="shortUrl"></div>
                 <button class="copy-btn" onclick="copyShortUrl()">Copy</button>
 
-                <div style="margin-
+                <div style="margin-top: 12px; color: #555;">
+                    Link gốc:
+                    <div class="link-url" id="originalUrl"></div>
+                </div>
+            </div>
+
+            <div class="cert-info">
+                Certificate: CA-26/11/2029.p12
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== THỜI GIAN KẾT THÚC BẢO TRÌ ==========
+        // 04/10/2026 10:18:00 (GMT+7) — đúng 2 ngày kể từ lúc cập nhật
+        const MAINTENANCE_END = new Date('2026-10-04T10:18:00+07:00').getTime();
+
+        function showMainContent() {
+            document.getElementById('maintenance').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.title = 'URL Shortener';
+        }
+
+        function showMaintenance() {
+            document.getElementById('maintenance').style.display = 'block';
+            document.getElementById('main-content').style.display = 'none';
+            document.title = 'Bảo trì hệ thống';
+        }
+
+        function updateCountdown() {
+            const now = Date.now();
+            const distance = MAINTENANCE_END - now;
+
+            if (distance <= 0) {
+                showMainContent();
+                return;
+            }
+
+            showMaintenance();
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Chạy ngay + cập nhật mỗi giây
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ========== LOGIC RÚT GỌN URL ==========
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.className = `status show ${type}`;
+            statusEl.textContent = message;
+        }
+
+        function showLoading(show) {
+            const loadingEl = document.getElementById('loading');
+            loadingEl.className = show ? 'loading show' : 'loading';
+        }
+
+        async function shortenUrl() {
+            const urlInput = document.getElementById('urlInput');
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                showStatus('Vui lòng nhập URL!', 'error');
+                return;
+            }
+
+            try {
+                new URL(url);
+            } catch (e) {
+                showStatus('URL không hợp lệ!', 'error');
+                return;
+            }
+
+            showLoading(true);
+            document.getElementById('result').classList.remove('show');
+            document.getElementById('status').classList.remove('show');
+
+            try {
+                const response = await fetch('/api/shorten', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                showLoading(false);
+
+                if (response.ok) {
+                    document.getElementById('shortUrl').textContent = data.shortUrl;
+                    document.getElementById('originalUrl').textContent = data.originalUrl;
+                    document.getElementById('result').classList.add('show');
+                    showStatus('Rút gọn thành công!', 'success');
+                } else {
+                    showStatus('Lỗi: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showLoading(false);
+                showStatus('Lỗi kết nối: ' + error.message, 'error');
+            }
+        }
+
+        function copyShortUrl() {
+            const shortUrl = document.getElementById('shortUrl').textContent;
+            navigator.clipboard.writeText(shortUrl).then(() => {
+                showStatus('Đã copy link!', 'success');
+            }).catch(err => {
+                showStatus('Không thể copy: ' + err.message, 'error');
+            });
+        }
+
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                shortenUrl();
+            }
+        });
+    </script>
+</body>
+</html>
