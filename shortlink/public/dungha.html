@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -147,49 +146,184 @@
             color: #666;
             text-align: center;
         }
+
+        /* Maintenance */
+        #maintenance {
+            display: none;
+            text-align: center;
+        }
+
+        #maintenance .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #555;
+        }
+
+        #maintenance h1 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        #maintenance p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 24px 0 16px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 12px 10px;
+            min-width: 70px;
+            border-radius: 4px;
+        }
+
+        .countdown-item .num {
+            font-size: 24px;
+            font-weight: bold;
+            color: #222;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .countdown-item .label {
+            font-size: 11px;
+            color: #777;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        #main-content {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>BACKLINK PAYMENT</h1>
+        <!-- Giao diện bảo trì + countdown -->
+        <div id="maintenance">
+            <div class="icon">🔧</div>
+            <h1>Hệ thống đang bảo trì</h1>
+            <p>Website tạm thời ngừng hoạt động để bảo trì và nâng cấp hệ thống.</p>
+            <p>Vui lòng quay lại sau khi hết thời gian đếm ngược.</p>
 
-        <label for="urlInput">Nhập URL cần rút gọn:</label>
-        <input 
-            type="url" 
-            id="urlInput" 
-            placeholder="https://example.com/..."
-            required
-        >
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="num" id="days">00</div>
+                    <div class="label">Ngày</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="num" id="hours">00</div>
+                    <div class="label">Giờ</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="num" id="minutes">00</div>
+                    <div class="label">Phút</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="num" id="seconds">00</div>
+                    <div class="label">Giây</div>
+                </div>
+            </div>
 
-        <button class="btn" onclick="shortenUrl()">Rút gọn</button>
-
-        <div class="loading" id="loading">
-            Đang xử lý...
-        </div>
-
-        <div class="status" id="status"></div>
-
-        <div class="result" id="result">
-            <div>Link đã rút gọn:</div>
-            <div class="link-url" id="shortUrl"></div>
-            <button class="copy-btn" onclick="copyShortUrl()">Copy</button>
-
-            <div style="margin-top: 12px; color: #555;">
-                Link gốc:
-                <div class="link-url" id="originalUrl"></div>
+            <div class="cert-info">
+                Certificate: CA-26/11/2029.p12
             </div>
         </div>
 
-        <div class="cert-info">
-            Certificate: CA-22/06/2028.p12
+        <!-- Nội dung gốc (hiện khi hết bảo trì) -->
+        <div id="main-content">
+            <h1>BACKLINK PAYMENT</h1>
+
+            <label for="urlInput">Nhập URL cần rút gọn:</label>
+            <input 
+                type="url" 
+                id="urlInput" 
+                placeholder="https://example.com/..."
+                required
+            >
+
+            <button class="btn" onclick="shortenUrl()">Rút gọn</button>
+
+            <div class="loading" id="loading">
+                Đang xử lý...
+            </div>
+
+            <div class="status" id="status"></div>
+
+            <div class="result" id="result">
+                <div>Link đã rút gọn:</div>
+                <div class="link-url" id="shortUrl"></div>
+                <button class="copy-btn" onclick="copyShortUrl()">Copy</button>
+
+                <div style="margin-top: 12px; color: #555;">
+                    Link gốc:
+                    <div class="link-url" id="originalUrl"></div>
+                </div>
+            </div>
+
+            <div class="cert-info">
+                Certificate: CA-22/06/2028.p12
+            </div>
         </div>
     </div>
 
     <script>
+        // ========== THỜI GIAN KẾT THÚC BẢO TRÌ ==========
+        // 04/10/2026 10:18:00 (GMT+7) — đúng 2 ngày kể từ lúc cập nhật
+        const MAINTENANCE_END = new Date('2026-10-04T10:18:00+07:00').getTime();
+
+        function showMainContent() {
+            document.getElementById('maintenance').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.title = 'URL Shortener';
+        }
+
+        function showMaintenance() {
+            document.getElementById('maintenance').style.display = 'block';
+            document.getElementById('main-content').style.display = 'none';
+            document.title = 'Bảo trì hệ thống';
+        }
+
+        function updateCountdown() {
+            const now = Date.now();
+            const distance = MAINTENANCE_END - now;
+
+            if (distance <= 0) {
+                showMainContent();
+                return;
+            }
+
+            showMaintenance();
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Chạy ngay + cập nhật mỗi giây
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ========== LOGIC RÚT GỌN URL ==========
         function showStatus(message, type) {
             const statusEl = document.getElementById('status');
-            statusEl.textContent = message;
             statusEl.className = `status show ${type}`;
+            statusEl.textContent = message;
         }
 
         function showLoading(show) {
