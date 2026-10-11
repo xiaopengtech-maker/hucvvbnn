@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viettel Tammi × MoMo – Mở Quà Nhận Tiền</title>
+    <title>Viettel Tammi × MoMo – Nhận 50.000 điểm Viettel++</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { height: 100%; }
@@ -101,7 +101,7 @@
             margin: 0 auto;
         }
 
-        /* ===== BRAND với LOGO THẬT ===== */
+        /* ===== BRAND ===== */
         .brand-row {
             display: flex;
             align-items: center;
@@ -391,7 +391,7 @@
             box-shadow: 0 7px 0 #b88a00;
         }
 
-        /* ===== REWARD ===== */
+        /* ===== REWARD – ĐIỂM VIETTEL++ ===== */
         .reward {
             display: none;
             width: 100%;
@@ -414,17 +414,12 @@
             margin-bottom: 6px;
         }
 
-        .reward-amount {
-            font-size: 46px;
-            font-weight: 900;
-            color: #ffd166;
-            line-height: 1.1;
-            text-shadow: 0 0 30px rgba(255,209,102,0.7), 0 4px 0 rgba(0,0,0,0.2);
-            margin-bottom: 4px;
-            letter-spacing: -1px;
-        }
-
-        .reward-amount.pop {
+        .reward-points-wrap {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
             animation: rewardPop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
@@ -432,6 +427,50 @@
             0%   { transform: scale(0.3); opacity: 0; }
             60%  { transform: scale(1.15); }
             100% { transform: scale(1); opacity: 1; }
+        }
+
+        .reward-points {
+            font-size: 52px;
+            font-weight: 900;
+            color: #ffd166;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255,209,102,0.7), 0 4px 0 rgba(0,0,0,0.2);
+            letter-spacing: -1.5px;
+        }
+
+        .reward-unit {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffd166;
+            text-shadow: 0 0 20px rgba(255,209,102,0.6);
+        }
+
+        .reward-viettel {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+            backdrop-filter: blur(6px);
+        }
+
+        .reward-viettel img {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            background: #fff;
+            padding: 1px;
+            object-fit: contain;
+        }
+
+        .reward-viettel span {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
 
         .reward-note {
@@ -454,7 +493,6 @@
 
         .link-form.show { opacity: 1; transform: translateY(0); }
 
-        /* Header form có 2 logo */
         .form-logos {
             display: flex;
             align-items: center;
@@ -573,7 +611,6 @@
             box-shadow: none;
         }
 
-        /* MoMo icon trong button */
         .btn-momo-icon {
             width: 22px;
             height: 22px;
@@ -631,7 +668,8 @@
             .hero .line2 { font-size: 22px; }
             .brand-name { font-size: 15px; }
             .logo-img { width: 42px; height: 42px; }
-            .reward-amount { font-size: 40px; }
+            .reward-points { font-size: 44px; }
+            .reward-unit { font-size: 16px; }
             .gift-stage { height: 240px; }
             .gift-box { transform: scale(0.9); }
         }
@@ -653,21 +691,15 @@
     <!-- MAIN -->
     <div class="wrap">
 
-        <!-- BRAND với logo Viettel + MoMo -->
+        <!-- BRAND -->
         <div class="brand-row">
             <div class="brand-logos">
-                <!-- Viettel Tammi logo -->
                 <img class="logo-img" 
-                     id="logoViettel"
                      src="https://fastly.mwm-storage.mwmcdn.com/raw_files/32d73626-dc6c-43bf-a59e-0509270e18a2?height=256&format=webp" 
                      alt="Viettel Tammi"
                      onerror="handleImageError(this, 'viettel')">
-
                 <span class="logo-x">×</span>
-
-                <!-- MoMo logo -->
                 <img class="logo-img" 
-                     id="logoMomo"
                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMmdD-RzdZYkPmboBcVRMDZz3fnQUQRoAMQA&s" 
                      alt="MoMo"
                      onerror="handleImageError(this, 'momo')">
@@ -682,7 +714,7 @@
         <!-- HERO -->
         <div class="hero">
             <div class="line1">🎉 Quà tặng giới hạn</div>
-            <div class="line2">Mở hộp quà <em>nhận ngay</em><br>tiền thưởng từ Tammi</div>
+            <div class="line2">Mở hộp quà <em>nhận ngay</em><br>50.000 điểm Viettel++</div>
         </div>
 
         <!-- HỘP QUÀ -->
@@ -715,11 +747,19 @@
         <!-- REWARD + FORM -->
         <div class="reward" id="reward">
             <div class="reward-label">Bạn nhận được</div>
-            <div class="reward-amount" id="rewardAmount">0đ</div>
-            <div class="reward-note">Liên kết Ví MoMo để nhận tiền vào ví</div>
+            <div class="reward-points-wrap">
+                <span class="reward-points">50.000</span>
+                <span class="reward-unit">điểm</span>
+            </div>
+            <div class="reward-viettel">
+                <img src="https://fastly.mwm-storage.mwmcdn.com/raw_files/32d73626-dc6c-43bf-a59e-0509270e18a2?height=256&format=webp" 
+                     alt="Viettel"
+                     onerror="handleImageError(this, 'viettel')">
+                <span>Viettel++</span>
+            </div>
+            <div class="reward-note">Liên kết Ví MoMo để nhận điểm vào tài khoản Viettel++</div>
 
             <div class="link-form" id="linkForm">
-                <!-- 2 logo ở đầu form -->
                 <div class="form-logos">
                     <img class="logo-img" 
                          src="https://fastly.mwm-storage.mwmcdn.com/raw_files/32d73626-dc6c-43bf-a59e-0509270e18a2?height=256&format=webp" 
@@ -735,7 +775,7 @@
                 <h3>🔗 Liên kết Ví MoMo</h3>
                 <div class="sub">
                     Nhập số điện thoại MoMo để liên kết và nhận<br>
-                    <strong id="formAmount">0đ</strong> vào ví của bạn
+                    <strong>50.000 điểm Viettel++</strong> vào tài khoản của bạn
                 </div>
 
                 <label class="form-label" for="phone">Số điện thoại MoMo</label>
@@ -750,19 +790,18 @@
                 <div class="err" id="phoneErr">Vui lòng nhập số điện thoại 10 số hợp lệ</div>
 
                 <button class="btn-claim" id="claimBtn" onclick="claimGift()">
-                    <!-- MoMo icon thật trong nút -->
                     <img class="btn-momo-icon" 
                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMmdD-RzdZYkPmboBcVRMDZz3fnQUQRoAMQA&s" 
                          alt="MoMo"
-                         onerror="this.style.display='none'">
-                    Liên kết ví để nhận quà
+                         onerror="handleImageError(this, 'momo')">
+                    Liên kết ví để nhận điểm
                 </button>
             </div>
         </div>
 
         <div class="footer-note">
             * Chương trình có giới hạn, áp dụng theo điều khoản của Viettel Tammi & MoMo.<br>
-            Viettel Tammi là sản phẩm của Viettel. MoMo là ví điện tử của M_Service.
+            Điểm thưởng Viettel++ sẽ được cộng sau khi liên kết thành công.
         </div>
 
     </div>
@@ -774,13 +813,11 @@
     </div>
 
     <script>
-        // ============ XỬ LÝ LỖI ẢNH (FALLBACK) ============
-        // Nếu logo tải lỗi, tự động thay bằng SVG dự phòng
+        // ============ XỬ LÝ LỖI ẢNH (FALLBACK SVG) ============
         function handleImageError(img, type) {
-            img.onerror = null; // tránh lặp vô hạn
+            img.onerror = null;
 
             if (type === 'viettel') {
-                // Fallback logo Viettel dạng SVG
                 img.src = "data:image/svg+xml;utf8," + encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                         <rect width="100" height="100" rx="22" fill="#EE0033"/>
@@ -790,7 +827,6 @@
                     </svg>
                 `);
             } else if (type === 'momo') {
-                // Fallback logo MoMo dạng SVG
                 img.src = "data:image/svg+xml;utf8," + encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                         <defs>
@@ -831,30 +867,6 @@
 
         spawnConfetti(45, false);
 
-        // ============ RANDOM TIỀN 200 – 1.000.000 ============
-        function randomAmount() {
-            const raw = Math.floor(Math.random() * (1000000 - 200 + 1)) + 200;
-            if (raw >= 1000) return Math.floor(raw / 1000) * 1000;
-            return Math.floor(raw / 100) * 100;
-        }
-
-        function formatMoney(v) {
-            return v.toLocaleString('vi-VN') + 'đ';
-        }
-
-        function countUp(el, target, duration = 1500) {
-            const start = performance.now();
-            function tick(now) {
-                const t = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - t, 3);
-                const value = Math.floor(eased * target);
-                el.textContent = formatMoney(value);
-                if (t < 1) requestAnimationFrame(tick);
-                else el.textContent = formatMoney(target);
-            }
-            requestAnimationFrame(tick);
-        }
-
         // ============ MỞ QUÀ ============
         let opened = false;
 
@@ -869,10 +881,12 @@
 
             spawnConfetti(30, true);
 
+            // Ẩn hộp quà sau khi mở xong
             setTimeout(() => {
                 document.getElementById('giftStage').classList.add('hidden');
             }, 700);
 
+            // Hiện reward + form
             setTimeout(() => {
                 const reward = document.getElementById('reward');
                 reward.classList.add('show');
@@ -880,13 +894,7 @@
                 requestAnimationFrame(() => {
                     reward.classList.add('visible');
 
-                    const amount = randomAmount();
-                    const el = document.getElementById('rewardAmount');
-                    el.classList.add('pop');
-                    countUp(el, amount);
-
-                    document.getElementById('formAmount').textContent = formatMoney(amount);
-
+                    // Form trượt lên sau 300ms
                     setTimeout(() => {
                         document.getElementById('linkForm').classList.add('show');
                         document.getElementById('phone').focus({ preventScroll: true });
