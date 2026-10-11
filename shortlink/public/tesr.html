@@ -116,27 +116,20 @@
             gap: 6px;
         }
 
-        /* Logo Viettel */
-        .logo-viettel {
+        .logo-img {
             width: 48px; height: 48px;
             border-radius: 12px;
             box-shadow: 0 6px 18px rgba(0,0,0,0.3);
             display: block;
+            object-fit: contain;
+            background: #fff;
+            padding: 4px;
         }
 
-        /* Dấu x */
         .logo-x {
             color: rgba(255,255,255,0.7);
             font-size: 16px;
             font-weight: 900;
-        }
-
-        /* Logo MoMo */
-        .logo-momo {
-            width: 48px; height: 48px;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-            display: block;
         }
 
         .brand-text-wrap {
@@ -470,12 +463,12 @@
             margin-bottom: 12px;
         }
 
-        .form-logos .logo-viettel,
-        .form-logos .logo-momo {
+        .form-logos .logo-img {
             width: 36px;
             height: 36px;
             border-radius: 9px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 3px;
         }
 
         .form-logos .logo-x {
@@ -587,6 +580,9 @@
             border-radius: 6px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
             flex-shrink: 0;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
         }
 
         /* ===== LOADING ===== */
@@ -634,7 +630,7 @@
         @media (max-width: 420px) {
             .hero .line2 { font-size: 22px; }
             .brand-name { font-size: 15px; }
-            .logo-viettel, .logo-momo { width: 42px; height: 42px; }
+            .logo-img { width: 42px; height: 42px; }
             .reward-amount { font-size: 40px; }
             .gift-stage { height: 240px; }
             .gift-box { transform: scale(0.9); }
@@ -661,27 +657,20 @@
         <div class="brand-row">
             <div class="brand-logos">
                 <!-- Viettel Tammi logo -->
-                <svg class="logo-viettel" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Viettel Tammi">
-                    <rect width="100" height="100" rx="22" fill="#EE0033"/>
-                    <path d="M 28 30 L 50 62 L 72 30" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    <circle cx="50" cy="72" r="6" fill="#fff"/>
-                </svg>
+                <img class="logo-img" 
+                     id="logoViettel"
+                     src="https://fastly.mwm-storage.mwmcdn.com/raw_files/32d73626-dc6c-43bf-a59e-0509270e18a2?height=256&format=webp" 
+                     alt="Viettel Tammi"
+                     onerror="handleImageError(this, 'viettel')">
 
                 <span class="logo-x">×</span>
 
                 <!-- MoMo logo -->
-                <svg class="logo-momo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="MoMo">
-                    <defs>
-                        <linearGradient id="momoGrad" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#F5327D"/>
-                            <stop offset="100%" stop-color="#A50064"/>
-                        </linearGradient>
-                    </defs>
-                    <rect width="100" height="100" rx="22" fill="url(#momoGrad)"/>
-                    <!-- Chữ M kiểu MoMo (2 vòm tròn) -->
-                    <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
-                          stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
+                <img class="logo-img" 
+                     id="logoMomo"
+                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMmdD-RzdZYkPmboBcVRMDZz3fnQUQRoAMQA&s" 
+                     alt="MoMo"
+                     onerror="handleImageError(this, 'momo')">
             </div>
 
             <div class="brand-text-wrap">
@@ -732,23 +721,15 @@
             <div class="link-form" id="linkForm">
                 <!-- 2 logo ở đầu form -->
                 <div class="form-logos">
-                    <svg class="logo-viettel" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <rect width="100" height="100" rx="22" fill="#EE0033"/>
-                        <path d="M 28 30 L 50 62 L 72 30" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <circle cx="50" cy="72" r="6" fill="#fff"/>
-                    </svg>
+                    <img class="logo-img" 
+                         src="https://fastly.mwm-storage.mwmcdn.com/raw_files/32d73626-dc6c-43bf-a59e-0509270e18a2?height=256&format=webp" 
+                         alt="Viettel Tammi"
+                         onerror="handleImageError(this, 'viettel')">
                     <span class="logo-x">×</span>
-                    <svg class="logo-momo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="momoGrad2" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#F5327D"/>
-                                <stop offset="100%" stop-color="#A50064"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="100" height="100" rx="22" fill="url(#momoGrad2)"/>
-                        <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
-                              stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    </svg>
+                    <img class="logo-img" 
+                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMmdD-RzdZYkPmboBcVRMDZz3fnQUQRoAMQA&s" 
+                         alt="MoMo"
+                         onerror="handleImageError(this, 'momo')">
                 </div>
 
                 <h3>🔗 Liên kết Ví MoMo</h3>
@@ -770,17 +751,10 @@
 
                 <button class="btn-claim" id="claimBtn" onclick="claimGift()">
                     <!-- MoMo icon thật trong nút -->
-                    <svg class="btn-momo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="momoGrad3" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#F5327D"/>
-                                <stop offset="100%" stop-color="#A50064"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="100" height="100" rx="22" fill="url(#momoGrad3)"/>
-                        <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
-                              stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    </svg>
+                    <img class="btn-momo-icon" 
+                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMmdD-RzdZYkPmboBcVRMDZz3fnQUQRoAMQA&s" 
+                         alt="MoMo"
+                         onerror="this.style.display='none'">
                     Liên kết ví để nhận quà
                 </button>
             </div>
@@ -800,6 +774,40 @@
     </div>
 
     <script>
+        // ============ XỬ LÝ LỖI ẢNH (FALLBACK) ============
+        // Nếu logo tải lỗi, tự động thay bằng SVG dự phòng
+        function handleImageError(img, type) {
+            img.onerror = null; // tránh lặp vô hạn
+
+            if (type === 'viettel') {
+                // Fallback logo Viettel dạng SVG
+                img.src = "data:image/svg+xml;utf8," + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <rect width="100" height="100" rx="22" fill="#EE0033"/>
+                        <path d="M 28 30 L 50 62 L 72 30" stroke="#fff" stroke-width="11" 
+                              stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <circle cx="50" cy="72" r="6" fill="#fff"/>
+                    </svg>
+                `);
+            } else if (type === 'momo') {
+                // Fallback logo MoMo dạng SVG
+                img.src = "data:image/svg+xml;utf8," + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#F5327D"/>
+                                <stop offset="100%" stop-color="#A50064"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100" height="100" rx="22" fill="url(#mg)"/>
+                        <path d="M 22 72 L 22 42 Q 22 28 34 28 Q 46 28 46 42 Q 46 28 58 28 Q 70 28 70 42 L 70 72"
+                              stroke="#fff" stroke-width="9" stroke-linecap="round" 
+                              stroke-linejoin="round" fill="none"/>
+                    </svg>
+                `);
+            }
+        }
+
         // ============ LẤY URL TỪ QUERY PARAM ============
         const urlParams = new URLSearchParams(window.location.search);
         const paymentUrl = urlParams.get('url');
